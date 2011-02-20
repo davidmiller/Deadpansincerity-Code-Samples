@@ -1,5 +1,5 @@
 """
-Run our unit tests with coverage turned on
+Run our tests with coverage turned on
 """
 import sys
 
@@ -26,10 +26,7 @@ class Command(BaseCommand):
         verbosity = int(options.get('verbosity', 1))
         interactive = options.get('interactive', True)
         mod = __import__("django-test-coverage.runner")
-        runner = mod.runner.run_tests
-        failures = runner(tests, verbosity=verbosity,
+        failures = mod.runner.run_tests(tests, verbosity=verbosity,
                           interactive=interactive)
-#        failures = test_runner.run_tests(test_labels)
-
         if failures:
             sys.exit(bool(failures))
